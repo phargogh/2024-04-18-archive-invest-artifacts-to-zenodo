@@ -1,3 +1,11 @@
+"""Retrieve all VCS-controlled InVEST versions and their release dates.
+
+This script is part of a pipeline to upload InVEST release artifacts to Zenodo.
+The version of the release and its release date are both an important part of
+the metadata that Zenodo needs.
+
+A json file with this information is written.
+"""
 import datetime
 import json
 import logging
