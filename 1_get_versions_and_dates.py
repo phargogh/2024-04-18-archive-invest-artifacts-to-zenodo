@@ -15,7 +15,7 @@ import subprocess
 
 import requests
 
-logging.basicConfig(level=logging.DEBUG)
+logging.basicConfig(level=logging.INFO)
 LOGGER = logging.getLogger(os.path.basename(__file__))
 REPOS = {
     "invest": {
@@ -43,11 +43,13 @@ for repo_slug, repo_data in REPOS.items():
 
     tag_process = subprocess.run(["git", "-C", repo_slug, "tag", "-l"],
                                  capture_output=True)
-    for tag in tag_process.stdout.decode('ascii').split('\n'):
-        tag = tag.strip()
-        if not tag:  # There's usually a blank line in the printout
-            continue
-
+    tags = [tag.strip() for tag in
+            tag_process.stdout.decode('ascii').split('\n')
+            if tag]
+    LOGGER.info(f'{repo_slug}: Processing {len(tags)} tags')
+    for index, tag in enumerate(tags):
+        if index % 10 == 0:
+            LOGGER.info(f'{repo_slug} {index} of {len(tags)} complete')
         try:
             int(tag[0])  # skip any tags that aren't normal InVEST versions
         except ValueError:
@@ -66,7 +68,8 @@ for repo_slug, repo_data in REPOS.items():
         else:
             known_release_date = RELEASE_ASSETS[tag]['date']
             if known_release_date != date:
-                print(f"Conflicting dates for {tag}, {RELEASE_ASSETS[tag]} vs"
+                print(f"Conflicting dates for {tag}, "
+                      f"{RELEASE_ASSETS[tag]['date']} vs "
                       f"{date}, taking the later date")
             RELEASE_ASSETS[tag]['date'] = max(date, known_release_date)
 
@@ -79,7 +82,11 @@ for repo_slug, repo_data in REPOS.items():
             RELEASE_ASSETS[tag][repo_data['label']] = url
 
 for key, value in RELEASE_ASSETS.items():
-    RELEASE_ASSETS[key]['date'] = value.date().isoformat()
+    try:
+        RELEASE_ASSETS[key]['date'] = value['date'].date().isoformat()
+    except Exception as e:
+        print(key, value)
+        continue
 
 with open('release-dates.json', 'w') as release_dates_json:
     release_dates_json.write(
