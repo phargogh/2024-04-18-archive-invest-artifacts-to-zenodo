@@ -6,17 +6,33 @@ the metadata that Zenodo needs.
 
 A json file with this information is written.
 """
+import collections
 import datetime
 import json
 import logging
 import os
 import subprocess
 
+import requests
+
+logging.basicConfig(level=logging.DEBUG)
 LOGGER = logging.getLogger(os.path.basename(__file__))
-REPO_SLUGS = ["invest", "invest.users-guide", "invest.arcgis",
-              "invest-natcap.invest-3"]
-RELEASE_DATES = {}
-for repo_slug in REPO_SLUGS:
+REPOS = {
+    "invest": {
+        "label": "InVEST source code",
+    },
+    "invest-natcap.invest-3": {
+        "label": "InVEST source code",
+    },
+    "invest.arcgis": {
+        "label": "InVEST ArcGIS Toolboxes (InVEST 2.x series)",
+    },
+    "invest.users-guide": {
+        "label": "InVEST User's Guide",
+    },
+}
+RELEASE_ASSETS = collections.defaultdict(dict)
+for repo_slug, repo_data in REPOS.items():
     if not os.path.exists(repo_slug):
         LOGGER.info(f"Cloning {repo_slug}")
         subprocess.run(
@@ -45,18 +61,26 @@ for repo_slug in REPO_SLUGS:
         date = datetime.datetime.fromisoformat(
             date_proc.stdout.decode('ascii').split(' ')[0])
 
-        if tag not in RELEASE_DATES:
-            RELEASE_DATES[tag] = date
+        if tag not in RELEASE_ASSETS:
+            RELEASE_ASSETS[tag]['date'] = date
         else:
-            known_release_date = RELEASE_DATES[tag]
+            known_release_date = RELEASE_ASSETS[tag]['date']
             if known_release_date != date:
-                print(f"Conflicting dates for {tag}, {RELEASE_DATES[tag]} vs"
+                print(f"Conflicting dates for {tag}, {RELEASE_ASSETS[tag]} vs"
                       f"{date}, taking the later date")
-            RELEASE_DATES[tag] = max(date, known_release_date)
+            RELEASE_ASSETS[tag]['date'] = max(date, known_release_date)
 
-for key, value in RELEASE_DATES.items():
-    RELEASE_DATES[key] = value.date().isoformat()
+        url = f'https://github.com/natcap/{repo_slug}/archive/refs/tags/{tag}.zip'
+        with requests.get(url, stream=True) as resp:
+            header = next(resp.iter_content(chunk_size=10))
+        if resp.status_code == 404:
+            continue
+        else:
+            RELEASE_ASSETS[tag][repo_data['label']] = url
+
+for key, value in RELEASE_ASSETS.items():
+    RELEASE_ASSETS[key]['date'] = value.date().isoformat()
 
 with open('release-dates.json', 'w') as release_dates_json:
     release_dates_json.write(
-        json.dumps(RELEASE_DATES, indent=4, sort_keys=True))
+        json.dumps(RELEASE_ASSETS, indent=4, sort_keys=True))
