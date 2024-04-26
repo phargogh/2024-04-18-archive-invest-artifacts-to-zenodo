@@ -18,20 +18,21 @@ with open('release-dates.json') as release_dates:
 
 
 def _list_files_from_gsutil(gsutil_path, files_only=True):
+    LOGGER.info(f'listing files from {gsutil_path}')
     args = ['gsutil', 'ls', gsutil_path]
     if files_only:
         args.insert(2, '-d')
-    gsutil_process = subprocess.run(
-        args, capture_output=True)
+    gsutil_process_stdout = subprocess.run(
+        args, capture_output=True).stdout.strip()
     return [path.strip().replace('gs://', 'https://storage.googleapis.com/')
-            for path in gsutil_process.stdout.decode(
+            for path in gsutil_process_stdout.decode(
                 'ascii').strip().split('\n')]
 
 
 tags = list(tags) + ['1.001', '1.002', '1.003', '1.004', '1.005', '2.0']
 
 DATAPORTAL = 'gs://data.naturalcapitalproject.org'
-RELEASES = 'gs://release.naturalcapitalproject.org'
+RELEASES = 'gs://releases.naturalcapitalproject.org'
 
 LOGGER.info("Getting top-level files")
 _TL_FILES_JSON = 'top-level-files.json'
@@ -61,19 +62,23 @@ for tag in sorted(tags):
     if Version('1.0.0') <= tag_ver < Version('2.0.0'):
         data_files = []  # sample data were distributed _in_ the installer
         release_files = _find_version_files(tag)
-    if Version('2.0.0') <= tag_ver < Version('2.4.0'):
+    elif Version('2.0.0') <= tag_ver < Version('2.4.0'):
         # Data files are in the root of the invest-data directory
         data_files = _list_files_from_gsutil(f'{DATAPORTAL}/invest-data/*.zip')
         release_files = _find_version_files(tag)
+        if not release_files:
+            release_files = _find_version_files(tag.replace('.', '_'))
         if tag_ver == Version('2.1'):  # 2.1.0 == 2.1 when parsed
             release_files += _find_version_files('2.1')
+            release_files += _find_version_files('2_1')
     elif Version('2.4.0') <= tag_ver <= Version('3.6.0'):
         # data files in their own dir of dataportal/invest-data
         data_files = _list_files_from_gsutil(
             f'{DATAPORTAL}/invest-data/{tag}/*.zip')
         release_files = _list_files_from_gsutil(
             f'{DATAPORTAL}/invest-releases/{tag}/*.*')
-        pprint.pprint(release_files)
+        release_files += _find_version_files(tag.replace('.', '_'))
+        release_files += _find_version_files(tag)
     elif Version('3.6.0') < tag_ver:
         # current data files are in release bucket/* and data are in
         # bucket/data (look for *_sample_data.zip)
@@ -89,6 +94,8 @@ for tag in sorted(tags):
             if os.path.basename(file) == f'InVEST_{tag}_sample_data.zip':
                 data_files = [file]
                 break
+    else:
+        raise ValueError(tag)
 
     # Some early releases are not tracked in source control and first appear in
     # this script.
@@ -96,6 +103,12 @@ for tag in sorted(tags):
         release_data[tag] = {}
 
     release_data[tag]['data'] = data_files
+    if tag not in {'2.1.1', '2.1.2', '2.2.0b1', '2.2.0b2', '2.2.0rc1',
+                   '2.2.0rc2', '2.2.0rc3', '2.2.1b1', '2.2.1b2', '2.2.1rc1',
+                   '2.2.2b1', '2.3.0a1', '2.3.0a1', '2.3.0a2', '2.3.0a3',
+                   '2.3.0a4', '2.3.0a5', '2.3.0a6', '2.3.0a7', '2.3.0a8',
+                   '2.3.0a9', '2.3.0b1', '2.3.0b2', '2.3.0b3'}:
+        assert len(release_files) > 0
     release_data[tag]['release_artifacts'] = release_files
 
 
