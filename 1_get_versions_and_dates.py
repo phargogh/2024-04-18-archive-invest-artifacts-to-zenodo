@@ -88,6 +88,10 @@ for key, value in RELEASE_ASSETS.items():
         print(key, value)
         continue
 
+# This was clearly a version typo.
+RELEASE_ASSETS['2.2.1rc1'] = RELEASE_ASSETS['2.21rc1']
+del RELEASE_ASSETS['2.21rc1']
+
 with open('release-dates.json', 'w') as release_dates_json:
     release_dates_json.write(
         json.dumps(RELEASE_ASSETS, indent=4, sort_keys=True))
