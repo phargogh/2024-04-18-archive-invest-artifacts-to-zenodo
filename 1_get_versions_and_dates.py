@@ -55,7 +55,7 @@ for repo_slug, repo_data in REPOS.items():
             continue
 
         date_proc = subprocess.run(
-            ['git', '-C', repo_slug, 'log', '-n1', '--format=%ci', tag],
+            ['git', '--git-dir', repo_slug, 'log', '-n1', '--format=%ci', tag],
             capture_output=True)
 
         # format is 2021-10-29 13:35:28 -0400
