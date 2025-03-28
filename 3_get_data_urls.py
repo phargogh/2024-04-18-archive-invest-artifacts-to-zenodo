@@ -29,7 +29,7 @@ def _list_files_from_gsutil(gsutil_path, files_only=True):
                 'ascii').strip().split('\n')]
 
 
-tags = list(tags) + ['1.001', '1.002', '1.003', '1.004', '1.005', '2.0']
+tags = list(tags) + ["1.0", '1.001', '1.002', '1.003', '1.004', '1.005', '2.0']
 
 DATAPORTAL = 'gs://data.naturalcapitalproject.org'
 RELEASES = 'gs://releases.naturalcapitalproject.org'
