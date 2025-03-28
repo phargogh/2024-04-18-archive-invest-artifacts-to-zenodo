@@ -39,9 +39,9 @@ for repo_slug, repo_data in REPOS.items():
             ["git", "clone", f"https://github.com/natcap/{repo_slug}.git"])
     else:
         LOGGER.info(f"{repo_slug} exists, fetching latest changes")
-        subprocess.run(["git", "-C", repo_slug, "fetch"])
+        subprocess.run(["git", "--git-dir", repo_slug, "fetch"])
 
-    tag_process = subprocess.run(["git", "-C", repo_slug, "tag", "-l"],
+    tag_process = subprocess.run(["git", "--git-dir", repo_slug, "tag", "-l"],
                                  capture_output=True)
     tags = [tag.strip() for tag in
             tag_process.stdout.decode('ascii').split('\n')
