@@ -32,40 +32,41 @@ REPOS = {
     },
 }
 
+PRE_VCS_KEY = "Installer, User's Guide and Source Code"
 PRE_GIT_DATA = {
     "1.0": {
         "date": "2008-10-13",
-        "installer":
+        PRE_VCS_KEY:
             "http://data.naturalcapitalproject.org/invest-releases/InVEST_1.0_beta-Setup.exe",
     },
     "1.001": {
         "date": "2008-12-16",
-        "installer":
+        PRE_VCS_KEY:
             "http://data.naturalcapitalproject.org/invest-releases/InVEST_1.001_beta-Setup.exe"
     },
     "1.002": {
         "date": "2009-04-17",
-        "installer":
+        PRE_VCS_KEY:
             "http://data.naturalcapitalproject.org/invest-releases/InVEST_1.002_beta-Setup.exe"
     },
     "1.003": {
         "date": "2009-08-10",
-        "installer":
+        PRE_VCS_KEY:
             "http://data.naturalcapitalproject.org/invest-releases/InVEST_1.003_beta-Setup.exe"
     },
     "1.004": {
         "date": "2010-03-12",
-        "installer":
+        PRE_VCS_KEY:
             "http://data.naturalcapitalproject.org/invest-releases/InVEST_1.004_beta-Setup.exe"
     },
     "1.005": {
         "date": "2010-07-12",
-        "installer":
+        PRE_VCS_KEY:
             "http://data.naturalcapitalproject.org/invest-releases/InVEST_1.005_beta-Setup.exe"
     },
     "2.0": {
         "date": "2011-02-16",
-        "installer":
+        PRE_VCS_KEY:
             "http://data.naturalcapitalproject.org/invest-releases/InVEST_2.0_beta-Setup.exe"
     },
 }
