@@ -2,6 +2,7 @@ import collections
 import json
 import logging
 import os
+import sys
 
 import requests
 
@@ -34,8 +35,7 @@ for version in release_dates.keys():
         url = (
             f'https://github.com/natcap/{repo}/'
             f'archive/refs/tags/{version}.zip')
-        resp = requests.head(url)
-        if resp.status_code >= 400:  # This isn't the right check. Some 302 pass
+        if not requests.head(url).ok:  # This isn't the right check. Some 302 pass
             LOGGER.info(f"Link does not exist: {url}")
             continue
         RELEASE_ASSETS[version][label] = url
