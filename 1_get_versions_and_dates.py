@@ -31,19 +31,23 @@ REPOS = {
         "label": "InVEST User's Guide",
     },
 }
+
 RELEASE_ASSETS = collections.defaultdict(dict)
 for repo_slug, repo_data in REPOS.items():
+    common_git_opts = [
+        "--work-tree", repo_slug, "--git-dir", f"{repo_slug}/.git"]
     if not os.path.exists(repo_slug):
         LOGGER.info(f"Cloning {repo_slug}")
         subprocess.run(
             ["git", "clone", f"https://github.com/natcap/{repo_slug}.git"])
     else:
         LOGGER.info(f"{repo_slug} exists, fetching latest changes")
-        subprocess.run(["git", "--work-tree", repo_slug, "fetch", "--tags"],
-                       check=True)
+        subprocess.run(
+            ["git", *common_git_opts, "fetch", "--tags"],
+            check=True)
 
     tag_process = subprocess.run(
-        ["git", "--work-tree", repo_slug, "tag", "-l"],
+        ["git", *common_git_opts, "tag", "-l"],
         capture_output=True, check=True)
     tags = [tag.strip() for tag in
             tag_process.stdout.decode('ascii').split('\n')
@@ -57,8 +61,7 @@ for repo_slug, repo_data in REPOS.items():
             continue
 
         date_proc = subprocess.run(
-            ['git', '--work-tree', repo_slug, 'log', '-n1',
-             '--format=%ci', tag],
+            ['git', *common_git_opts, 'log', '-n1', '--format=%ci', tag],
             capture_output=True, check=True)
 
         # format is 2021-10-29 13:35:28 -0400
