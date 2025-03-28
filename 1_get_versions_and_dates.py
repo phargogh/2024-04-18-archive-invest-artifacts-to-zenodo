@@ -39,7 +39,8 @@ for repo_slug, repo_data in REPOS.items():
             ["git", "clone", f"https://github.com/natcap/{repo_slug}.git"])
     else:
         LOGGER.info(f"{repo_slug} exists, fetching latest changes")
-        subprocess.run(["git", "--work-tree", repo_slug, "fetch"], check=True)
+        subprocess.run(["git", "--work-tree", repo_slug, "fetch", "--tags"],
+                       check=True)
 
     tag_process = subprocess.run(
         ["git", "--work-tree", repo_slug, "tag", "-l"],
