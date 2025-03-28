@@ -39,10 +39,11 @@ for repo_slug, repo_data in REPOS.items():
             ["git", "clone", f"https://github.com/natcap/{repo_slug}.git"])
     else:
         LOGGER.info(f"{repo_slug} exists, fetching latest changes")
-        subprocess.run(["git", "--git-dir", repo_slug, "fetch"], check=True)
+        subprocess.run(["git", "--work-tree", repo_slug, "fetch"], check=True)
 
-    tag_process = subprocess.run(["git", "--git-dir", repo_slug, "tag", "-l"],
-                                 capture_output=True, check=True)
+    tag_process = subprocess.run(
+        ["git", "--work-tree", repo_slug, "tag", "-l"],
+        capture_output=True, check=True)
     tags = [tag.strip() for tag in
             tag_process.stdout.decode('ascii').split('\n')
             if tag]
@@ -55,7 +56,8 @@ for repo_slug, repo_data in REPOS.items():
             continue
 
         date_proc = subprocess.run(
-            ['git', '--git-dir', repo_slug, 'log', '-n1', '--format=%ci', tag],
+            ['git', '--work-tree', repo_slug, 'log', '-n1',
+             '--format=%ci', tag],
             capture_output=True, check=True)
 
         # format is 2021-10-29 13:35:28 -0400
