@@ -80,7 +80,7 @@
     "2.2.1rc1": {
         "InVEST ArcGIS Toolboxes (InVEST 2.x series)": "https://github.com/natcap/invest.arcgis/archive/refs/tags/2.2.1rc1.zip",
         "InVEST User's Guide": "https://github.com/natcap/invest.users-guide/archive/refs/tags/2.2.1rc1.zip",
-        "InVEST source code": "https://github.com/natcap/invest-natcap.invest-3/archive/refs/tags/2.2.1rc1.zip",
+        "InVEST source code": "https://github.com/natcap/invest-natcap.invest-3/archive/refs/tags/2.21rc1.zip",
         "date": "2012-01-25"
     },
     "2.2.2": {
@@ -94,10 +94,6 @@
         "InVEST User's Guide": "https://github.com/natcap/invest.users-guide/archive/refs/tags/2.2.2b1.zip",
         "InVEST source code": "https://github.com/natcap/invest-natcap.invest-3/archive/refs/tags/2.2.2b1.zip",
         "date": "2012-03-03"
-    },
-    "2.2.1rc1": {
-        "InVEST source code": "https://github.com/natcap/invest-natcap.invest-3/archive/refs/tags/2.21rc1.zip",
-        "date": "2012-01-25"
     },
     "2.3.0": {
         "InVEST ArcGIS Toolboxes (InVEST 2.x series)": "https://github.com/natcap/invest.arcgis/archive/refs/tags/2.3.0.zip",
@@ -531,6 +527,16 @@
         "InVEST User's Guide": "https://github.com/natcap/invest.users-guide/archive/refs/tags/3.14.1.zip",
         "InVEST source code": "https://github.com/natcap/invest/archive/refs/tags/3.14.1.zip",
         "date": "2023-12-18"
+    },
+    "3.14.2": {
+        "InVEST User's Guide": "https://github.com/natcap/invest.users-guide/archive/refs/tags/3.14.2.zip",
+        "InVEST source code": "https://github.com/natcap/invest/archive/refs/tags/3.14.2.zip",
+        "date": "2024-05-29"
+    },
+    "3.14.3": {
+        "InVEST User's Guide": "https://github.com/natcap/invest.users-guide/archive/refs/tags/3.14.3.zip",
+        "InVEST source code": "https://github.com/natcap/invest/archive/refs/tags/3.14.3.zip",
+        "date": "2024-12-19"
     },
     "3.2.0": {
         "InVEST ArcGIS Toolboxes (InVEST 2.x series)": "https://github.com/natcap/invest.arcgis/archive/refs/tags/3.2.0.zip",
