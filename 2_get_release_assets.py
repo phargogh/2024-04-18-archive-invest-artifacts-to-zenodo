@@ -9,8 +9,12 @@ logging.basicConfig(level=logging.INFO)
 JSON_FILENAME = 'release-dates.json'
 LOGGER = logging.getLogger(os.path.basename(__file__))
 
-with open(JSON_FILENAME, 'r') as release_dates_json:
-    release_dates = json.load(release_dates_json)
+try:
+    with open(JSON_FILENAME, 'r') as release_dates_json:
+        release_dates = json.load(release_dates_json)
+except FileNotFoundError:
+    print('Run $ python 1_get_versions_and_dates.py first')
+    sys.exit(1)
 
 RELEASE_ASSETS = collections.defaultdict(dict)
 for version in release_dates.keys():
