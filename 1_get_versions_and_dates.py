@@ -48,8 +48,7 @@ for repo_slug, repo_data in REPOS.items():
             if tag]
     LOGGER.info(f'{repo_slug}: Processing {len(tags)} tags')
     for index, tag in enumerate(tags):
-        if index % 10 == 0:
-            LOGGER.info(f'{repo_slug} {index} of {len(tags)} complete')
+        LOGGER.info(f'Processing tag {tag}')
         try:
             int(tag[0])  # skip any tags that aren't normal InVEST versions
         except ValueError:
@@ -73,23 +72,24 @@ for repo_slug, repo_data in REPOS.items():
                       f"{date}, taking the later date")
             RELEASE_ASSETS[tag]['date'] = max(date, known_release_date)
 
-        url = f'https://github.com/natcap/{repo_slug}/archive/refs/tags/{tag}.zip'
-        with requests.get(url, stream=True) as resp:
-            header = next(resp.iter_content(chunk_size=10))
-        if resp.status_code == 404:
+        url = (f'https://github.com/natcap/{repo_slug}'
+               f'/archive/refs/tags/{tag}.zip')
+        if not requests.head(url).ok:
+            LOGGER.warning(f"Archive asset not found at {url}")
             continue
         else:
             RELEASE_ASSETS[tag][repo_data['label']] = url
+    LOGGER.info(f"Finished processing tags for repo {repo_slug}")
 
 for key, value in RELEASE_ASSETS.items():
     try:
         RELEASE_ASSETS[key]['date'] = value['date'].date().isoformat()
-    except Exception as e:
-        print(key, value)
+    except Exception:
+        LOGGER.exception(f"Could not parse date on key: {key}, value: {value}")
         continue
 
-# This was clearly a version typo.
-RELEASE_ASSETS['2.2.1rc1'] = RELEASE_ASSETS['2.21rc1']
+# This was clearly a version typo on the invest-natcap.invest-3 repo.
+RELEASE_ASSETS['2.2.1rc1'].update(RELEASE_ASSETS['2.21rc1'])
 del RELEASE_ASSETS['2.21rc1']
 
 with open('release-dates.json', 'w') as release_dates_json:
