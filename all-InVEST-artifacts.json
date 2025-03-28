@@ -515,6 +515,8 @@
         "release_artifacts": []
     },
     "2.2.1rc1": {
+        "InVEST ArcGIS Toolboxes (InVEST 2.x series)": "https://github.com/natcap/invest.arcgis/archive/refs/tags/2.2.1rc1.zip",
+        "InVEST User's Guide": "https://github.com/natcap/invest.users-guide/archive/refs/tags/2.2.1rc1.zip",
         "InVEST source code": "https://github.com/natcap/invest-natcap.invest-3/archive/refs/tags/2.21rc1.zip",
         "data": [
             "https://storage.googleapis.com/data.naturalcapitalproject.org/invest-data/AestheticQuality.zip",
@@ -3008,6 +3010,57 @@
             "https://storage.googleapis.com/releases.naturalcapitalproject.org/invest/3.14.1/natcap.invest-3.14.1-cp39-cp39-macosx_10_9_x86_64.whl",
             "https://storage.googleapis.com/releases.naturalcapitalproject.org/invest/3.14.1/natcap.invest-3.14.1-cp39-cp39-win_amd64.whl",
             "https://storage.googleapis.com/releases.naturalcapitalproject.org/invest/3.14.1/natcap.invest-3.14.1.tar.gz"
+        ]
+    },
+    "3.14.2": {
+        "InVEST User's Guide": "https://github.com/natcap/invest.users-guide/archive/refs/tags/3.14.2.zip",
+        "InVEST source code": "https://github.com/natcap/invest/archive/refs/tags/3.14.2.zip",
+        "data": [
+            "https://storage.googleapis.com/releases.naturalcapitalproject.org/invest/3.14.2/InVEST_3.14.2_sample_data.zip"
+        ],
+        "date": "2024-05-29",
+        "release_artifacts": [
+            "https://storage.googleapis.com/releases.naturalcapitalproject.org/invest/3.14.2/InVEST_3.14.2_sample_data.zip",
+            "https://storage.googleapis.com/releases.naturalcapitalproject.org/invest/3.14.2/InVEST_3.14.2_userguide.zip",
+            "https://storage.googleapis.com/releases.naturalcapitalproject.org/invest/3.14.2/natcap.invest-3.14.2-cp310-cp310-macosx_10_9_x86_64.whl",
+            "https://storage.googleapis.com/releases.naturalcapitalproject.org/invest/3.14.2/natcap.invest-3.14.2-cp310-cp310-macosx_11_0_arm64.whl",
+            "https://storage.googleapis.com/releases.naturalcapitalproject.org/invest/3.14.2/natcap.invest-3.14.2-cp310-cp310-win_amd64.whl",
+            "https://storage.googleapis.com/releases.naturalcapitalproject.org/invest/3.14.2/natcap.invest-3.14.2-cp311-cp311-macosx_10_9_x86_64.whl",
+            "https://storage.googleapis.com/releases.naturalcapitalproject.org/invest/3.14.2/natcap.invest-3.14.2-cp311-cp311-macosx_11_0_arm64.whl",
+            "https://storage.googleapis.com/releases.naturalcapitalproject.org/invest/3.14.2/natcap.invest-3.14.2-cp311-cp311-win_amd64.whl",
+            "https://storage.googleapis.com/releases.naturalcapitalproject.org/invest/3.14.2/natcap.invest-3.14.2-cp312-cp312-macosx_10_9_x86_64.whl",
+            "https://storage.googleapis.com/releases.naturalcapitalproject.org/invest/3.14.2/natcap.invest-3.14.2-cp312-cp312-macosx_11_0_arm64.whl",
+            "https://storage.googleapis.com/releases.naturalcapitalproject.org/invest/3.14.2/natcap.invest-3.14.2-cp312-cp312-win_amd64.whl",
+            "https://storage.googleapis.com/releases.naturalcapitalproject.org/invest/3.14.2/natcap.invest-3.14.2-cp38-cp38-macosx_10_9_x86_64.whl",
+            "https://storage.googleapis.com/releases.naturalcapitalproject.org/invest/3.14.2/natcap.invest-3.14.2-cp38-cp38-macosx_11_0_arm64.whl",
+            "https://storage.googleapis.com/releases.naturalcapitalproject.org/invest/3.14.2/natcap.invest-3.14.2-cp38-cp38-win_amd64.whl",
+            "https://storage.googleapis.com/releases.naturalcapitalproject.org/invest/3.14.2/natcap.invest-3.14.2-cp39-cp39-macosx_10_9_x86_64.whl",
+            "https://storage.googleapis.com/releases.naturalcapitalproject.org/invest/3.14.2/natcap.invest-3.14.2-cp39-cp39-macosx_11_0_arm64.whl",
+            "https://storage.googleapis.com/releases.naturalcapitalproject.org/invest/3.14.2/natcap.invest-3.14.2-cp39-cp39-win_amd64.whl",
+            "https://storage.googleapis.com/releases.naturalcapitalproject.org/invest/3.14.2/natcap_invest-3.14.2.tar.gz"
+        ]
+    },
+    "3.14.3": {
+        "InVEST User's Guide": "https://github.com/natcap/invest.users-guide/archive/refs/tags/3.14.3.zip",
+        "InVEST source code": "https://github.com/natcap/invest/archive/refs/tags/3.14.3.zip",
+        "data": [
+            "https://storage.googleapis.com/releases.naturalcapitalproject.org/invest/3.14.3/InVEST_3.14.3_sample_data.zip"
+        ],
+        "date": "2024-12-19",
+        "release_artifacts": [
+            "https://storage.googleapis.com/releases.naturalcapitalproject.org/invest/3.14.3/InVEST_3.14.3_sample_data.zip",
+            "https://storage.googleapis.com/releases.naturalcapitalproject.org/invest/3.14.3/InVEST_3.14.3_userguide.zip",
+            "https://storage.googleapis.com/releases.naturalcapitalproject.org/invest/3.14.3/natcap.invest-3.14.3-cp310-cp310-macosx_10_13_x86_64.whl",
+            "https://storage.googleapis.com/releases.naturalcapitalproject.org/invest/3.14.3/natcap.invest-3.14.3-cp310-cp310-win_amd64.whl",
+            "https://storage.googleapis.com/releases.naturalcapitalproject.org/invest/3.14.3/natcap.invest-3.14.3-cp311-cp311-macosx_10_13_x86_64.whl",
+            "https://storage.googleapis.com/releases.naturalcapitalproject.org/invest/3.14.3/natcap.invest-3.14.3-cp311-cp311-win_amd64.whl",
+            "https://storage.googleapis.com/releases.naturalcapitalproject.org/invest/3.14.3/natcap.invest-3.14.3-cp312-cp312-macosx_10_13_x86_64.whl",
+            "https://storage.googleapis.com/releases.naturalcapitalproject.org/invest/3.14.3/natcap.invest-3.14.3-cp312-cp312-win_amd64.whl",
+            "https://storage.googleapis.com/releases.naturalcapitalproject.org/invest/3.14.3/natcap.invest-3.14.3-cp38-cp38-macosx_10_13_x86_64.whl",
+            "https://storage.googleapis.com/releases.naturalcapitalproject.org/invest/3.14.3/natcap.invest-3.14.3-cp38-cp38-win_amd64.whl",
+            "https://storage.googleapis.com/releases.naturalcapitalproject.org/invest/3.14.3/natcap.invest-3.14.3-cp39-cp39-macosx_10_13_x86_64.whl",
+            "https://storage.googleapis.com/releases.naturalcapitalproject.org/invest/3.14.3/natcap.invest-3.14.3-cp39-cp39-win_amd64.whl",
+            "https://storage.googleapis.com/releases.naturalcapitalproject.org/invest/3.14.3/natcap_invest-3.14.3.tar.gz"
         ]
     },
     "3.2.0": {
