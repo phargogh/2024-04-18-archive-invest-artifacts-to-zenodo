@@ -19,54 +19,53 @@ logging.basicConfig(level=logging.INFO)
 LOGGER = logging.getLogger(os.path.basename(__file__))
 REPOS = {
     "invest": {
-        "label": "InVEST source code",
+        "label": "InVEST-source-code-{version}{ext}",
     },
     "invest-natcap.invest-3": {
-        "label": "InVEST source code",
+        "label": "InVEST-source-code-{version}{ext}",
     },
     "invest.arcgis": {
-        "label": "InVEST ArcGIS Toolboxes (InVEST 2.x series)",
+        "label": "InVEST-ArcGIS-toolbox-{version}{ext}",
     },
     "invest.users-guide": {
-        "label": "InVEST User's Guide",
+        "label": "InVEST-users-guide-source-code-{version}{ext}",
     },
 }
 
-PRE_VCS_KEY = "Installer, User's Guide and Source Code"
 PRE_GIT_DATA = {
     "1.0": {
         "date": "2008-10-13",
-        PRE_VCS_KEY:
+        "InVEST_1.0_beta-Setup.exe":
             "http://data.naturalcapitalproject.org/invest-releases/InVEST_1.0_beta-Setup.exe",
     },
     "1.001": {
         "date": "2008-12-16",
-        PRE_VCS_KEY:
+        "InVEST_1.001_beta-Setup.exe":
             "http://data.naturalcapitalproject.org/invest-releases/InVEST_1.001_beta-Setup.exe"
     },
     "1.002": {
         "date": "2009-04-17",
-        PRE_VCS_KEY:
+        "InVEST_1.002_beta-Setup.exe":
             "http://data.naturalcapitalproject.org/invest-releases/InVEST_1.002_beta-Setup.exe"
     },
     "1.003": {
         "date": "2009-08-10",
-        PRE_VCS_KEY:
+        "InVEST_1.003_beta-Setup.exe":
             "http://data.naturalcapitalproject.org/invest-releases/InVEST_1.003_beta-Setup.exe"
     },
     "1.004": {
         "date": "2010-03-12",
-        PRE_VCS_KEY:
+        "InVEST_1.004_beta-Setup.exe":
             "http://data.naturalcapitalproject.org/invest-releases/InVEST_1.004_beta-Setup.exe"
     },
     "1.005": {
         "date": "2010-07-12",
-        PRE_VCS_KEY:
+        "InVEST_1.005_beta-Setup.exe":
             "http://data.naturalcapitalproject.org/invest-releases/InVEST_1.005_beta-Setup.exe"
     },
     "2.0": {
         "date": "2011-02-16",
-        PRE_VCS_KEY:
+        "InVEST_2.0_beta-Setup.exe":
             "http://data.naturalcapitalproject.org/invest-releases/InVEST_2.0_beta-Setup.exe"
     },
 }
@@ -120,7 +119,12 @@ for repo_slug, repo_data in REPOS.items():
 
         url = (f'https://github.com/natcap/{repo_slug}'
                f'/archive/refs/tags/{tag}.zip')
-        RELEASE_ASSETS[tag][repo_data['label']] = url
+
+        label = repo_data['label'].format(
+            version=tag,
+            ext=os.path.splitext(url)[1]
+        )
+        RELEASE_ASSETS[tag][label] = url
     LOGGER.info(f"Finished processing tags for repo {repo_slug}")
 
 for key, value in RELEASE_ASSETS.items():
