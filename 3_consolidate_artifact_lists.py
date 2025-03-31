@@ -1,8 +1,6 @@
 import json
 import os
 
-import requests
-
 
 def main():
     with open('release-dates.json') as release_file:
@@ -12,10 +10,7 @@ def main():
         artifact_data = json.load(data_file)
 
     consolidated_artifacts = {}
-    try:
-        assert github_data.keys() == artifact_data.keys()
-    except AssertionError:
-        import pdb; pdb.set_trace()
+    assert github_data.keys() == artifact_data.keys()
 
     for version in github_data.keys():
         version_artifacts = {}
