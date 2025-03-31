@@ -1,4 +1,32 @@
 {
+    "1.0": {
+        "Installer, User's Guide and Source Code": "http://data.naturalcapitalproject.org/invest-releases/InVEST_1.0_beta-Setup.exe",
+        "date": "2008-10-13"
+    },
+    "1.001": {
+        "Installer, User's Guide and Source Code": "http://data.naturalcapitalproject.org/invest-releases/InVEST_1.001_beta-Setup.exe",
+        "date": "2008-12-16"
+    },
+    "1.002": {
+        "Installer, User's Guide and Source Code": "http://data.naturalcapitalproject.org/invest-releases/InVEST_1.002_beta-Setup.exe",
+        "date": "2009-04-17"
+    },
+    "1.003": {
+        "Installer, User's Guide and Source Code": "http://data.naturalcapitalproject.org/invest-releases/InVEST_1.003_beta-Setup.exe",
+        "date": "2009-08-10"
+    },
+    "1.004": {
+        "Installer, User's Guide and Source Code": "http://data.naturalcapitalproject.org/invest-releases/InVEST_1.004_beta-Setup.exe",
+        "date": "2010-03-12"
+    },
+    "1.005": {
+        "Installer, User's Guide and Source Code": "http://data.naturalcapitalproject.org/invest-releases/InVEST_1.005_beta-Setup.exe",
+        "date": "2010-07-12"
+    },
+    "2.0": {
+        "Installer, User's Guide and Source Code": "http://data.naturalcapitalproject.org/invest-releases/InVEST_2.0_beta-Setup.exe",
+        "date": "2011-02-16"
+    },
     "2.1.0": {
         "InVEST ArcGIS Toolboxes (InVEST 2.x series)": "https://github.com/natcap/invest.arcgis/archive/refs/tags/2.1.0.zip",
         "InVEST User's Guide": "https://github.com/natcap/invest.users-guide/archive/refs/tags/2.1.0.zip",

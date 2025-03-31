@@ -72,6 +72,7 @@ PRE_GIT_DATA = {
 }
 
 RELEASE_ASSETS = collections.defaultdict(dict)
+RELEASE_ASSETS.update(PRE_GIT_DATA)
 for repo_slug, repo_data in REPOS.items():
     common_git_opts = [
         "--work-tree", repo_slug, "--git-dir", f"{repo_slug}/.git"]
@@ -119,16 +120,15 @@ for repo_slug, repo_data in REPOS.items():
 
         url = (f'https://github.com/natcap/{repo_slug}'
                f'/archive/refs/tags/{tag}.zip')
-        if not requests.head(url).ok:
-            LOGGER.warning(f"Archive asset not found at {url}")
-            continue
-        else:
-            RELEASE_ASSETS[tag][repo_data['label']] = url
+        RELEASE_ASSETS[tag][repo_data['label']] = url
     LOGGER.info(f"Finished processing tags for repo {repo_slug}")
 
 for key, value in RELEASE_ASSETS.items():
     try:
-        RELEASE_ASSETS[key]['date'] = value['date'].date().isoformat()
+        if isinstance(value['date'], str):
+            datestring = value['date']
+        else:
+            RELEASE_ASSETS[key]['date'] = value['date'].date().isoformat()
     except Exception:
         LOGGER.exception(f"Could not parse date on key: {key}, value: {value}")
         continue
