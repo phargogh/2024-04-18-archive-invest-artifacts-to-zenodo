@@ -1,4 +1,10 @@
 {
+    "1.0": {
+        "data": [],
+        "release_artifacts": [
+            "http://data.naturalcapitalproject.org/invest-releases/InVEST_1.0_beta-Setup.exe"
+        ]
+    },
     "1.001": {
         "data": [],
         "release_artifacts": [
