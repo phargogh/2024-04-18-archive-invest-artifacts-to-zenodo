@@ -102,6 +102,8 @@ for tag in sorted(tags):
     if tag not in release_data:
         release_data[tag] = {}
 
+    # Some releases did not include data files, so we're checking here that we
+    # have some data files tracked for known-good releases.
     release_data[tag]['data'] = data_files
     if tag not in {'2.1.1', '2.1.2', '2.2.0b1', '2.2.0b2', '2.2.0rc1',
                    '2.2.0rc2', '2.2.0rc3', '2.2.1b1', '2.2.1b2', '2.2.1rc1',
